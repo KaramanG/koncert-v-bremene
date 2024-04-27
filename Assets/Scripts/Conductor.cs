@@ -54,12 +54,6 @@ public class Conductor : MonoBehaviour
 
     void Update()
     {
-        /*
-        countdown();
-        if (countdownOver)
-            return;
-        */
-
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
         songPositionInBeats = songPosition / secPerBeat;
 
