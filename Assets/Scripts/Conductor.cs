@@ -27,11 +27,12 @@ public class Conductor : MonoBehaviour
     void Start()
     {
         countdownOver = false;
+        playSong(1);
     }
 
-    private void playSong()
+    private void playSong(int id)
     {
-        currentSong = songLibrary.songs[0];
+        currentSong = songLibrary.songs[id];
         songBpm = currentSong.BPM;
 
         musicSource.clip = currentSong.clip;
@@ -53,10 +54,12 @@ public class Conductor : MonoBehaviour
 
     void Update()
     {
+        /*
         countdown();
         if (countdownOver)
             return;
-        
+        */
+
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
         songPositionInBeats = songPosition / secPerBeat;
 
@@ -69,6 +72,6 @@ public class Conductor : MonoBehaviour
 
     void FixedUpdate()
     {
-        //noteScript.moveNotes(currentSong.ID);
+        noteScript.moveNotes(currentSong.ID);
     }
 }

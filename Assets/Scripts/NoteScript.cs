@@ -14,7 +14,7 @@ public class NoteScript : MonoBehaviour
     SongScript currentSong;
     public void spawnNotes(int songID)
     {
-        currentSong = songLibrary.songs[songID - 1];
+        currentSong = songLibrary.songs[songID];
 
         for (int i = 0;  i < currentSong.notes.Length; i++)
         {
@@ -22,10 +22,7 @@ public class NoteScript : MonoBehaviour
             float posOffset = -(currentSong.notes[i] * currentSong.noteSpacing +
                 currentSong.firstBeatOffset * (currentSong.BPM / 60));
 
-            Vector2 position = new Vector2(
-                tracks[track].position.x,
-                tracks[track].position.y + posOffset
-                );
+            Vector2 position = new Vector2(tracks[track].position.x, tracks[track].position.y + posOffset);
 
             GameObject note = Instantiate(notePrefab, position, Quaternion.identity);
             notes.Add(note);
@@ -38,7 +35,7 @@ public class NoteScript : MonoBehaviour
         if (!clearToStart)
             return;
 
-        currentSong = songLibrary.songs[songID - 1];
+        currentSong = songLibrary.songs[songID];
 
         for (int i = 0; i < notes.Count; i++)
         {
