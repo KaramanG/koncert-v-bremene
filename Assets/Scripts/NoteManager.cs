@@ -1,18 +1,18 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NoteManager : MonoBehaviour
 {
+    public Transform notemng;
     private Note currentNote;
     private string currentBaseAreaKey;
-    [SerializeField] private GameObject noteExample;
 
     void Update()
     {
-        if (currentNote != null && Input.GetKeyDown(currentBaseAreaKey))
+        if (currentNote != null &&
+            Input.GetKeyDown(currentBaseAreaKey))
         {
             currentNote.gameObject.SetActive(false);
             //ADD SOUNDS

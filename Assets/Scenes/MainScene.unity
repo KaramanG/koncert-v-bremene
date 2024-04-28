@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 519420033}
         m_TargetAssemblyTypeName: PauseScript, Assembly-CSharp
-        m_MethodName: PauseGame
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1114,6 +1114,7 @@ MonoBehaviour:
   source: {fileID: 1020104104}
   pauseScreen: {fileID: 1221686680}
   settingsScreen: {fileID: 1839877977}
+  conductor: {fileID: 2023069358}
 --- !u!1001 &536382087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1677,7 +1678,7 @@ GameObject:
   - component: {fileID: 742271657}
   - component: {fileID: 742271656}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Now Playing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1703,10 +1704,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: now playing
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e8ae3e9345ca0b0449eb32fd25072b5c, type: 2}
+  m_sharedMaterial: {fileID: -5450223352428886820, guid: e8ae3e9345ca0b0449eb32fd25072b5c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1737,8 +1738,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1796,8 +1797,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 503.8}
+  m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &777665400
 GameObject:
@@ -2364,7 +2365,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.25
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2410,7 +2411,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4328,6 +4329,8 @@ MonoBehaviour:
   songLibrary: {fileID: 2023069360}
   noteScript: {fileID: 1064495651}
   pauseScript: {fileID: 519420033}
+  songSelected: 0
+  nowPlaying: {fileID: 742271656}
 --- !u!4 &2023069359
 Transform:
   m_ObjectHideFlags: 0

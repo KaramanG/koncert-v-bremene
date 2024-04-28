@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
@@ -66,8 +67,10 @@ public class PauseScript : MonoBehaviour
         }
     }
 
+    [SerializeField] Conductor conductor;
     public void BackToMenu()
     {
-
+        conductor.songSelected = false;
+        SceneManager.LoadScene("StartScreen");
     }
 }

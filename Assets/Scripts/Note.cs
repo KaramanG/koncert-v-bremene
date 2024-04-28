@@ -10,11 +10,12 @@ public class Note : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Key" + (track+1).ToString()))
+        if (other.CompareTag("Key" + (track + 1).ToString()))
         {
             NoteManager noteManager = other.gameObject.GetComponent<NoteManager>();
             areaKey = keys[track];
             noteManager.SetCurrentNoteAndBaseArea(this, areaKey);
+
         }
     }
 }

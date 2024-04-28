@@ -46,18 +46,15 @@ public class NoteScript : MonoBehaviour
                 noteParent.transform.position.x,
                 noteParent.transform.position.y + (float)currentSong.noteSpacing);
 
-        noteParent.transform.DOMove(endDestination, 2f * 60f / (float)currentSong.BPM);
+        noteParent.transform.DOMove(endDestination,
+            (float)(currentSong.noteSpacing / (currentSong.BPM / 60f)));
+    }
 
-        /*
-        for (int i = 0; i < currentSong.notes.Length; i++)
+    public void clearNotes()
+    {
+        for (int i = 0; i < notes.Count; i++)
         {
-            if (notes[i].transform.position.y >= tracks[0].position.y)
-            {
-                Destroy(notes[i].gameObject);
-                notes.Remove(notes[i]);
-                break;
-            }
+            Destroy(notes[i]);
         }
-        */
     }
 }

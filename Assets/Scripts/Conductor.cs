@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Conductor : MonoBehaviour
 {
@@ -27,14 +29,14 @@ public class Conductor : MonoBehaviour
     [SerializeField] PauseScript pauseScript;
     double skippedTime;
 
-    bool songSelected;
-    void Start()
+    public bool songSelected;
+    private void Awake()
     {
         songSelected = false;
         skippedTime = 0f;
+        Time.timeScale = 1f;
     }
 
-    
     void Update()
     {
         if (!pauseScript.isPaused)
@@ -44,6 +46,8 @@ public class Conductor : MonoBehaviour
         }
         skippedTime = AudioSettings.dspTime - pausedDspTime;
     }
+
+    [SerializeField] TextMeshProUGUI nowPlaying;
 
     private void playSong(int i)
     {
@@ -56,6 +60,8 @@ public class Conductor : MonoBehaviour
 
         firstBeatOffset = currentSong.firstBeatOffset;
         beatsPerLoop = 4;
+
+        nowPlaying.text = currentSong.Artist + " - " + currentSong.Name;
 
         musicSource.Play();
         noteScript.spawnNotes(currentSong.ID);
@@ -77,15 +83,28 @@ public class Conductor : MonoBehaviour
             if (currentSong.BPM == 0f)
             {
                 playSong(0);
+                songSelected = true;
                 return;
             }
-            songSelected = true;
         }
 
         int currentBeat = 0;
         if (songPositionInBeats > 0 && songPositionInBeats >= currentBeat++)
         {
-            noteScript.moveNotes(currentSong.ID);
+            if (songPosition <= musicSource.clip.length)
+            {
+                noteScript.moveNotes(currentSong.ID);
+                
+            }
+            else
+            {
+                noteScript.clearNotes();
+
+                if (currentSong.ID == 2)
+                    SceneManager.LoadScene("StartScreen");
+
+                playSong(currentSong.ID + 1);
+            }
         }
     }
 }
