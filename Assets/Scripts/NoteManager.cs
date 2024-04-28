@@ -15,11 +15,15 @@ public class NoteManager : MonoBehaviour
         if (currentNote != null && Input.GetKeyDown(currentBaseAreaKey))
         {
             currentNote.gameObject.SetActive(false);
+            //ADD SOUNDS
         }
     }
 
     public void SetCurrentNoteAndBaseArea(Note note, string baseAreaKey)
     {
+        if (baseAreaKey == null)
+            return;
+
         currentNote = note;
         currentBaseAreaKey = baseAreaKey;
     }

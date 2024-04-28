@@ -6,21 +6,21 @@ using UnityEngine;
 public class Conductor : MonoBehaviour
 {
     public SongScript currentSong;
-    public float songBpm;
-    public float secPerBeat;
+    public double songBpm;
+    public double secPerBeat;
 
-    public float songPosition;
-    public float songPositionInBeats;
+    public double songPosition;
+    public double songPositionInBeats;
 
-    public float dspSongTime;
+    public double dspSongTime;
     public AudioSource musicSource;
     public double pausedDspTime;
-    public float firstBeatOffset;
+    public double firstBeatOffset;
 
-    public float beatsPerLoop;
+    public double beatsPerLoop;
     public int completedLoops = 0;
-    public float loopPositionInBeats;
-    public float loopPositionInAnalog;
+    public double loopPositionInBeats;
+    public double loopPositionInAnalog;
 
     [SerializeField] SongLibrary songLibrary;
     [SerializeField] NoteScript noteScript;
@@ -52,7 +52,7 @@ public class Conductor : MonoBehaviour
 
         musicSource.clip = currentSong.clip;
         secPerBeat = 60f / songBpm;
-        dspSongTime = (float)AudioSettings.dspTime;
+        dspSongTime = (double)AudioSettings.dspTime;
 
         firstBeatOffset = currentSong.firstBeatOffset;
         beatsPerLoop = 4;
@@ -63,7 +63,7 @@ public class Conductor : MonoBehaviour
 
     void FixedUpdate()
     {
-        songPosition = (float)(pausedDspTime - dspSongTime - firstBeatOffset);
+        songPosition = (double)(pausedDspTime - dspSongTime - firstBeatOffset);
         songPositionInBeats = songPosition / secPerBeat;
 
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)

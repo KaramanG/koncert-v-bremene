@@ -11,11 +11,11 @@ public class SongScript
     public string Artist;
     public AudioClip clip;
 
-    public float BPM;
-    public float firstBeatOffset;
+    public double BPM;
+    public double firstBeatOffset;
 
-    public float noteSpacing;
+    public double noteSpacing;
 
-    public float[] notes;
+    public double[] notes;
     public int[] noteTracks;
 }

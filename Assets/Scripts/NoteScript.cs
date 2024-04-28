@@ -21,10 +21,10 @@ public class NoteScript : MonoBehaviour
         for (int i = 0;  i < currentSong.notes.Length; i++)
         {
             int track = currentSong.noteTracks[i] - 1;
-            float offset = -(currentSong.notes[i] * currentSong.noteSpacing);
+            double offset = -(currentSong.notes[i] * currentSong.noteSpacing);
 
             Vector3 posOffset = new Vector3(tracks[track].position.x,
-                tracks[track].position.y + offset, tracks[track].position.z);
+                tracks[track].position.y + (float)offset, tracks[track].position.z);
 
             GameObject note = Instantiate(notePrefab, posOffset, Quaternion.identity);
             Note noteSettings = note.GetComponent<Note>();
@@ -44,19 +44,20 @@ public class NoteScript : MonoBehaviour
 
         Vector2 endDestination = new Vector2(
                 noteParent.transform.position.x,
-                noteParent.transform.position.y + currentSong.noteSpacing);
+                noteParent.transform.position.y + (float)currentSong.noteSpacing);
 
-        noteParent.transform.DOMove(endDestination, 2f * 60f / currentSong.BPM);
-
+        noteParent.transform.DOMove(endDestination, 2f * 60f / (float)currentSong.BPM);
 
         /*
-        for (int i = 0; i < notes.Count; i++)
+        for (int i = 0; i < currentSong.notes.Length; i++)
         {
-            Vector2 endDestination = new Vector2(
-                notes[i].transform.position.x,
-                notes[i].transform.position.y + currentSong.noteSpacing);
-
-            notes[i].transform.DOMove(endDestination, 2f * 60f / currentSong.BPM);
-        }*/
+            if (notes[i].transform.position.y >= tracks[0].position.y)
+            {
+                Destroy(notes[i].gameObject);
+                notes.Remove(notes[i]);
+                break;
+            }
+        }
+        */
     }
 }
