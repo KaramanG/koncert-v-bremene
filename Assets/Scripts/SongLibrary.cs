@@ -19,7 +19,7 @@ public class SongLibrary : MonoBehaviour
             clip = sounds[0],
             BPM = 128f,
             firstBeatOffset = 6f,
-            noteSpacing = 3f,
+            noteSpacing = 2f,
             notes = new float[]
             { 0f, 1f, 2f, 4f, 5f, 6f, 8f, 9f, 10f, 12f, 13f, 14f },
             noteTracks = new int[]

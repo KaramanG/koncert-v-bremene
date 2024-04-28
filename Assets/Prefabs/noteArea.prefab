@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2596534987321603641}
   - component: {fileID: 7553828961944276567}
-  - component: {fileID: 8823115555398950404}
   - component: {fileID: 3265073323943102603}
+  - component: {fileID: 8479926568863587174}
+  - component: {fileID: 8665551746589162260}
   m_Layer: 0
   m_Name: noteArea
   m_TagString: Untagged
@@ -86,21 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8823115555398950404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2549800116633357811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6a9dd3dd6296d4fb08f2b6b0b4ec30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  track: 0
-  noteExample: {fileID: 6497078497215587036, guid: 21c9ee99e54df4d47816123f8da38e25, type: 3}
-  circleCollider: {fileID: 3265073323943102603}
 --- !u!135 &3265073323943102603
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -116,9 +102,49 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.16
+  m_Radius: 0.12
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8479926568863587174
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549800116633357811}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &8665551746589162260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549800116633357811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c86284bc5949584184b7747419d59cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noteExample: {fileID: 6497078497215587036, guid: 21c9ee99e54df4d47816123f8da38e25, type: 3}
