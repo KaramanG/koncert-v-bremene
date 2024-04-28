@@ -14,6 +14,7 @@ public class Conductor : MonoBehaviour
 
     public float dspSongTime;
     public AudioSource musicSource;
+    public double pausedDspTime;
     public float firstBeatOffset;
 
     public float beatsPerLoop;
@@ -23,16 +24,30 @@ public class Conductor : MonoBehaviour
 
     [SerializeField] SongLibrary songLibrary;
     [SerializeField] NoteScript noteScript;
+    [SerializeField] PauseScript pauseScript;
+    double skippedTime;
 
+    bool songSelected;
     void Start()
     {
-        countdownOver = false;
-        playSong(1);
+        songSelected = false;
+        skippedTime = 0f;
     }
 
-    private void playSong(int id)
+    
+    void Update()
     {
-        currentSong = songLibrary.songs[id];
+        if (!pauseScript.isPaused)
+        {
+            pausedDspTime = AudioSettings.dspTime - skippedTime;
+            return;
+        }
+        skippedTime = AudioSettings.dspTime - pausedDspTime;
+    }
+
+    private void playSong(int i)
+    {
+        currentSong = songLibrary.songs[i];
         songBpm = currentSong.BPM;
 
         musicSource.clip = currentSong.clip;
@@ -46,26 +61,31 @@ public class Conductor : MonoBehaviour
         noteScript.spawnNotes(currentSong.ID);
     }
 
-    bool countdownOver;
-    public void countdown()
+    void FixedUpdate()
     {
-
-    }
-
-    void Update()
-    {
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
+        songPosition = (float)(pausedDspTime - dspSongTime - firstBeatOffset);
         songPositionInBeats = songPosition / secPerBeat;
 
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
             completedLoops++;
         loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
 
-        loopPositionInAnalog = loopPositionInBeats / beatsPerLoop;    
-    }
+        loopPositionInAnalog = loopPositionInBeats / beatsPerLoop;
 
-    void FixedUpdate()
-    {
-        noteScript.moveNotes(currentSong.ID);
+        if (!songSelected)
+        {
+            if (currentSong.BPM == 0f)
+            {
+                playSong(0);
+                return;
+            }
+            songSelected = true;
+        }
+
+        int currentBeat = 0;
+        if (songPositionInBeats > 0 && songPositionInBeats >= currentBeat++)
+        {
+            noteScript.moveNotes(currentSong.ID);
+        }
     }
 }

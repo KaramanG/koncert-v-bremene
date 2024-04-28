@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class NoteScript : MonoBehaviour
 {
@@ -19,13 +20,13 @@ public class NoteScript : MonoBehaviour
         for (int i = 0;  i < currentSong.notes.Length; i++)
         {
             int track = currentSong.noteTracks[i] - 1;
-            float posOffset = -(currentSong.notes[i] * currentSong.noteSpacing + 
-                currentSong.firstBeatOffset * (60f / currentSong.BPM));
+            float posOffset = -(currentSong.notes[i] * currentSong.noteSpacing);
 
             Vector2 position = new Vector2(tracks[track].position.x,
                 tracks[track].position.y + posOffset);
 
             GameObject note = Instantiate(notePrefab, position, Quaternion.identity);
+            note.tag = "Key" + currentSong.noteTracks[i].ToString();
             notes.Add(note);
         }
         clearToStart = true;
@@ -37,13 +38,14 @@ public class NoteScript : MonoBehaviour
             return;
 
         currentSong = songLibrary.songs[songID];
-        float speedFactor = 1f;
 
         for (int i = 0; i < notes.Count; i++)
         {
-            notes[i].transform.position = new Vector2(
+            Vector2 endDestination = new Vector2(
                 notes[i].transform.position.x,
-                notes[i].transform.position.y + currentSong.noteSpacing * speedFactor * Time.deltaTime);
+                notes[i].transform.position.y + currentSong.noteSpacing);
+
+            notes[i].transform.DOMove(endDestination, 2f * 60f / currentSong.BPM);
         }
     }
 }

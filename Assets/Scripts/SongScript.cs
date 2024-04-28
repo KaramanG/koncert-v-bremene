@@ -15,7 +15,6 @@ public class SongScript
     public float firstBeatOffset;
 
     public float noteSpacing;
-    public float speedModifier;
 
     public float[] notes;
     public int[] noteTracks;
